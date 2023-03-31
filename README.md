@@ -35,6 +35,7 @@
 </details>
 
 ## ERD
+![Screenshot of ERD](assets/Tickit_ERD.png)
 
 ## Models
 
