@@ -41,13 +41,11 @@ class VenueSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
     
-    image_url = serializers.ModelSerializer.serializer_url_field(
+    venue = serializers.ModelSerializer.serializer_url_field(
         view_name='venue_detail'
     )
 
     class Meta:
         model = Venue
-        fields = ('id', 'name', 'address', 'image_url', 'event')
-
-
+        fields = ('id', 'name', 'address', 'image_url', 'event', 'venue')
 
