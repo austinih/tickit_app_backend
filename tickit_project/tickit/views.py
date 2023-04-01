@@ -21,13 +21,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer 
     
-class EventVenueDetail(View):
-    def get(self, request, venue_pk, event_pk):
-        venue = get_object_or_404(Venue, pk=venue_pk)
-        event = get_object_or_404(Event, pk=event_pk)
-        context = {'venue': venue, 'event': event}
-        return render(request, 'event_venue_detail.html', context)
-    
+
 class TicketList(generics.ListCreateAPIView):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
@@ -35,4 +29,30 @@ class TicketList(generics.ListCreateAPIView):
 class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer 
+
+
+
+
+
+
+
+class EventVenueDetail(View):
+    def get(self, request, venue_pk, event_pk):
+        venue = get_object_or_404(Venue, pk=venue_pk)
+        event = get_object_or_404(Event, pk=event_pk)
+        context = {'venue': venue, 'event': event}
+        return render(request, 'event_venue_detail.html', context)
+    
+
+
+class VenueEventList(generics.ListAPIView):
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        venue_pk = self.kwargs['venue_pk']
+        venue = get_object_or_404(Venue, pk=venue_pk)
+        return venue.events.all()
+    
+
+
 
