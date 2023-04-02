@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from rest_framework import generics
+from django.http import HttpResponse
 from .serializers import VenueSerializer, EventSerializer, TicketSerializer
 from .models import Venue, Event, Ticket
 from django.views.generic import View
@@ -33,9 +34,6 @@ class TicketDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-
-
-
 class EventVenueDetail(View):
     def get(self, request, venue_pk, event_pk):
         venue = get_object_or_404(Venue, pk=venue_pk)
@@ -43,6 +41,22 @@ class EventVenueDetail(View):
         context = {'venue': venue, 'event': event}
         return render(request, 'event_venue_detail.html', context)
     
+
+class createTicketDetail(View):
+    def post(self, request):
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        seat_number = request.POST.get('seat_number')
+        credit_card_number = request.POST.get('credit_card_number')
+        Ticket.objects.create(
+            name=name,
+            email=email,
+            seat_number=seat_number,
+            credit_card_number=credit_card_number
+        )
+        return HttpResponse('Data received')
+
+
 
 
 class VenueEventList(generics.ListAPIView):
@@ -53,6 +67,7 @@ class VenueEventList(generics.ListAPIView):
         venue = get_object_or_404(Venue, pk=venue_pk)
         return venue.events.all()
     
+
 
 
 
