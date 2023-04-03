@@ -18,6 +18,8 @@ class Event(models.Model):
     date = models.DateField(null=True)
     genre = models.CharField(max_length=100, default='no genre title')
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    image_url = models.TextField(default='default_image_url')
+
 
     def __str__(self):
         return self.title
