@@ -12,7 +12,7 @@ urlpatterns = [
     path('tickets/<int:pk>/', views.TicketDetail.as_view(), name='ticket_detail'),
     path('venues/<int:venue_pk>/events', views.VenueEventList.as_view(), name='venue_event_list'),
     path('venues/<int:venue_pk>/events/<int:event_pk>/', views.EventVenueDetail.as_view(), name='event_venue_detail'),
-    path('create-ticket-detail/', views.createTicketDetail.as_view(), name='create_ticket_detail')
+    path('create-ticket-detail/', views.TicketCreateView.as_view(), name='create_ticket_detail')
 
 ]
 
