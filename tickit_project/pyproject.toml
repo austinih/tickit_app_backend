@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "mysite"
+name = "tickit-project"
 version = "0.1.0"
 description = ""
 authors = ["Tyler Carter <113203952+bojeebs@users.noreply.github.com>"]
 readme = "README.md"
+packages = [{include = "tickit_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"

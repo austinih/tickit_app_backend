@@ -1,18 +1,18 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: tickit
+    databaseName: Tickit
+    user: tickituser
 
 services:
   - type: web
-    name: mysite
+    name: Tickit
     env: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn mysite.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: tickit
           property: connectionString
       - key: SECRET_KEY
         generateValue: true

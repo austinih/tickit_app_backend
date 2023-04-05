@@ -67,6 +67,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,13 +102,14 @@ WSGI_APPLICATION = 'tickit_django.wsgi.application'
 
 DATABASES = {
     'default': {
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/mysite',        conn_max_age=600    )},
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'tickit',
         'USER': 'tickituser',
         'PASSWORD': 'tickit',
         'HOST': 'localhost'
     }
-}
+
 
 
 # Password validation
@@ -144,8 +146,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
+if not DEBUG:   
+   STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+   STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
