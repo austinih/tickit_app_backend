@@ -84,4 +84,4 @@ The Tickets model will store all data realting to each ticket purchased for an e
 </details>
 
 ## Links
-![Frontend Repo Link](https://github.com/austinih/tickit_app_frontend)
+- [Frontend Repo Link](https://github.com/austinih/tickit_app_frontend)
